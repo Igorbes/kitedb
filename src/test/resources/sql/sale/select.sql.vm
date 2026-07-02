@@ -1,0 +1,16 @@
+select
+    $k.optional('s.id')
+    $k.optional('s.user_id', 'userId')
+    $k.optional('s.timestamp')
+    $k.optional('s.amount')
+    $k.optional('s.summary')
+    $k.optional('s.postal', 'address.postal')
+    $k.optional('s.city', 'address.city')
+    $k.optional('s.street', 'address.street.name')
+    $k.end()
+from public.Sale s
+where true
+#set($filter = $k.filter())
+#if($filter.present('amount'))
+    and s.amount = $filter.param('amount')
+#end

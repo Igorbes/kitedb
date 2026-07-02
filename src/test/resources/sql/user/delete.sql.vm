@@ -1,0 +1,6 @@
+delete from public.User where
+#if($k.hasVar('name'))
+  name = $k.var('name')
+#elseif($k.collection())
+  id in ($k.help().toArray($k.collection()))
+#end

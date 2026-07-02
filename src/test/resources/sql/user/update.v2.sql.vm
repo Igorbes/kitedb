@@ -1,0 +1,1 @@
+update public.User set name = ?, surname = ? where nickname = $k.var('nickname')

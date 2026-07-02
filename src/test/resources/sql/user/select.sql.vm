@@ -1,0 +1,31 @@
+#define($view_main)
+    select
+        $k.optional('u.id')
+        $k.optional('u.name')
+        $k.optional('u.surname')
+        $k.optional('u.nickname')
+        #if(!$k.isCount()) $k.optional('s.sales')  #end
+        $k.end()
+    from public.User u
+    #if($k.isJoined('sales') && !$k.isCount())
+        #set($sales = $k.join('sales'))
+        left join ($sales.sql()) s on s.$sales.joinKey('userId') = u.id
+    #end
+    where true
+
+    #set($filter = $k.filter())
+    #if($filter.present('id'))
+      and u.id = $filter.param('id')
+    #end
+    #if($filter.present('without_nickname'))
+      and u.nickname is null
+    #end
+#end
+
+#if($k.isCopy())
+    copy ($view_main) to stdout with (format csv, header)
+#elseif($k.isCount())
+    select count(1) from ($view_main) v
+#else
+    select v.* from ($view_main) v
+#end

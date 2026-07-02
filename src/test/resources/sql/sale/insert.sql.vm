@@ -1,0 +1,2 @@
+insert into public.Sale(user_id, amount, summary, postal, street, city) values (?, ?, ?, ?, ?, ?)
+RETURNING id, user_id, timestamp, amount, summary, postal, street, city

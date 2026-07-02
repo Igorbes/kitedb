@@ -1,0 +1,22 @@
+create table public.User
+(
+    id      serial primary key,
+    name    varchar(255),
+    surname varchar(255),
+    nickname varchar(255)
+);
+
+create table public.Sale
+(
+    id        serial primary key,
+    user_id   int,
+    timestamp timestamp default now(),
+    amount    int4,
+    summary   int4,
+    postal    int4,
+    street    varchar(255),
+    city    varchar(255),
+    CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES public.User (id) on delete cascade
+);
+
+

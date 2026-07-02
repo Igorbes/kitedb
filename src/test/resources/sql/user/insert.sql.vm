@@ -1,0 +1,1 @@
+insert into public.User(name, surname, nickname) values (?, ?, $k.var('nickname'))

@@ -1,0 +1,4 @@
+insert into public.User(id, name, surname, nickname) values (?, ?, ?, ?)
+on conflict(id) do update set name = excluded.name,
+                              surname = excluded.surname,
+                              nickname = excluded.nickname
