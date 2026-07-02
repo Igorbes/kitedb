@@ -370,7 +370,7 @@ public DataGraph<Sale, SaleFilter> graph(SaleFilter filter) throws DataException
 Database queries are written in templates processed by Apache Velocity (see the [Apache Velocity](https://velocity.apache.org/) documentation). The optimal option is to use the .sql.vm file extension, so the editor can still correctly detect both the SQL language structure and the template structure. [KiteContext.java](src/main/java/pro/kitedb/context/KiteContext.java) is passed to the template as the $k variable. This context is used to build the final SQL script depending on the provided graph and filter. Templates are searched in classpath resources (see the [Apache Velocity](https://velocity.apache.org/) documentation). You can override the template lookup mechanism by overriding the KiteJdbcTemplate.init method.
 
 /sql/user/select.sql.vm
-```sql
+```vtl
 #define($view_main)
     select
         $k.optional('u.id')
@@ -407,7 +407,7 @@ Database queries are written in templates processed by Apache Velocity (see the 
 ```
 
 /sql/sale/select.sql.vm
-```sql
+```vtl
 select
     $k.optional('s.id')
     $k.optional('s.user_id', 'userId')
@@ -425,7 +425,7 @@ where true
     and s.amount = $filter.param('amount')
 #end
 ```
-```sql
+```vtl
 $k.optional - returns the SQL construct 'u.name as "User.name",' when .required("name") is set
 $k.isJoined('sales') - returns true if the sales DataGraph was added to DataGraph
 $k.end() - finishes the selection with an 'end' column at the end so the SQL construct remains valid
@@ -439,7 +439,7 @@ $k.isCopy(), $k.isCount(), $k.isSelect(), etc. - define the operation method (CR
 Column aliases are formed using [SqlFieldPrefixFactory.java](src/main/java/pro/kitedb/graph/prefix/SqlFieldPrefixFactory.java) + the column name. It can be passed when building a graph through the static methods of [DataGraphBuilder.java](src/main/java/pro/kitedb/graph/DataGraphBuilder.java).
 ### Filter
 Data filtering through [Filter.java](src/main/java/pro/kitedb/graph/Filter.java) is performed through PreparedStatement to prevent injections. The filter is passed to DataGraph when it is created through a method or through the static methods of [DataGraphBuilder.java](src/main/java/pro/kitedb/graph/DataGraphBuilder.java).
-```java
+```vtl
 $k.filter() - returns the filter
 $filter.present('id') - returns true if the corresponding key was passed. The key value can be anything, including null
 $filter.get('id') - returns the Prepared parameter ':User.id'
