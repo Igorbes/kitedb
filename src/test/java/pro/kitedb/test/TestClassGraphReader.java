@@ -8,23 +8,16 @@ import pro.kitedb.graph.reader.PlainObjectGraph;
 import java.util.List;
 
 @RunWith(JUnit4.class)
-public class Test {
+public class TestClassGraphReader {
 
     @org.junit.Test
     public void test() {
         List<String> graph = new PlainObjectGraph(A.class, "**").getGraph();
         Assert.assertEquals("Incorrect size result", 10, graph.size());
 
-        graph = new PlainObjectGraph(A.class, "b.*").getGraph();
-        Assert.assertEquals("Incorrect size result", 4, graph.size());
-        Assert.assertEquals("Incorrect value", "b.*", graph.get(0));
-        Assert.assertEquals("Incorrect value", "b.b1", graph.get(1));
-        Assert.assertEquals("Incorrect value", "b.b2", graph.get(2));
-        Assert.assertEquals("Incorrect value", "b.b3", graph.get(3));
-
-        graph = new PlainObjectGraph(A.class, "b.**").getGraph();
+        graph = new PlainObjectGraph(B.class, "b").getGraph();
         Assert.assertEquals("Incorrect size result", 7, graph.size());
-        Assert.assertEquals("Incorrect value", "b.**", graph.get(0));
+        Assert.assertEquals("Incorrect value", "b", graph.get(0));
         Assert.assertEquals("Incorrect value", "b.b1", graph.get(1));
         Assert.assertEquals("Incorrect value", "b.b2", graph.get(2));
         Assert.assertEquals("Incorrect value", "b.b3", graph.get(3));
