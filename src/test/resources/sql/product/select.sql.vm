@@ -1,0 +1,14 @@
+#define($main_view)
+    select
+        $k.optional('p.id')
+        $k.optional('p.name')
+        ( select array_agg(cp.name) from public.Product_coupon cp ) as $k.graph().alias('coupon'),
+        $k.optional('pd.discount')
+        $k.end()
+    from public.Product p
+    left join public.Product_discount pd on p.id = pd.product_id
+#end
+
+
+
+select * from ($main_view) mv

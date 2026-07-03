@@ -162,7 +162,7 @@ public class DataGraphImp<O, F extends Filter<? super O>> implements DataGraph<O
     public void discriminator(JdbcMapperFactory jdbcMapperFactory) throws DataException {
         Set<String> fields = graphNodeMap.keySet();
         for(String field: fields) {
-            graphNodeMap.get(field).discriminate(this, jdbcMapperFactory);
+            graphNodeMap.get(field).discriminate(field, this, jdbcMapperFactory);
         }
     }
 

@@ -78,7 +78,7 @@ public class DataJoinLayerGraphNode<O, F extends Filter<? super O>> implements G
     }
 
     @Override
-    public void discriminate(DataGraph<O, F> parentGraph, JdbcMapperFactory jdbcMapperFactory) throws DataException {
+    public void discriminate(String fieldName, DataGraph<O, F> parentGraph, JdbcMapperFactory jdbcMapperFactory) throws DataException {
         DataGraph<?, F> subGraph = function.apply(parentGraph);
         if(subGraph != null) {
             subGraph.discriminator(jdbcMapperFactory);

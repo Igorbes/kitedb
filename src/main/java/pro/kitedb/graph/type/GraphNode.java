@@ -20,7 +20,7 @@ public interface GraphNode<O, F extends Filter<? super O>> {
 
     String[] keys(DataGraph<O, F> parentGraph, boolean withPrefix);
 
-    void discriminate(DataGraph<O, F> parentGraph, JdbcMapperFactory jdbcMapperFactory) throws DataException;
+    void discriminate(String fieldName, DataGraph<O, F> parentGraph, JdbcMapperFactory jdbcMapperFactory) throws DataException;
 
     boolean isKey();
 }

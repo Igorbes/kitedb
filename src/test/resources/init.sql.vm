@@ -20,3 +20,22 @@ create table public.Sale
 );
 
 
+create table public.Product
+(
+    id        serial primary key,
+    name      varchar
+);
+
+create table public.Product_discount
+(
+    product_id        int,
+    discount      int,
+    CONSTRAINT product_id_fk FOREIGN KEY (product_id) REFERENCES public.Product (id) on delete cascade
+);
+
+create table public.Product_coupon
+(
+    name      varchar
+);
+
+

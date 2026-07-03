@@ -1,0 +1,1 @@
+insert into public.Product_discount(product_id, discount) values (:product_id, :discount)

@@ -3,6 +3,7 @@ package pro.kitedb.graph;
 
 import pro.kitedb.exception.DataException;
 import pro.kitedb.exception.GraphException;
+import pro.kitedb.graph.discriminator.Discrimination;
 import pro.kitedb.graph.prefix.SimpleClassNameSqlFieldPrefixFactory;
 import pro.kitedb.graph.prefix.SimplePredefineClassNameSqlFieldPrefixFactory;
 import pro.kitedb.graph.prefix.SqlFieldPrefixFactory;
@@ -13,7 +14,6 @@ import pro.kitedb.graph.type.SimpleAliasGraphNode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.apache.commons.collections.CollectionUtils;
-import org.simpleflatmapper.jdbc.JdbcMapperFactory;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -88,8 +88,8 @@ public class DataGraphBuilder<O, F extends Filter<? super O>> {
         return this;
     }
 
-    public DataGraphBuilder<O, F> required(String fieldName, DataGraphBiConsumer<DataGraph<O, F>, JdbcMapperFactory> discriminator) throws DataException {
-        putNode(fieldName, new SimpleAliasGraphNode<>(fieldName, sqlFieldPrefixFactory, false, discriminator));
+    public DataGraphBuilder<O, F> required(String fieldName, Discrimination<O, F> discrimination) throws DataException {
+        putNode(fieldName, new SimpleAliasGraphNode<>(fieldName, sqlFieldPrefixFactory, false, discrimination));
         return this;
     }
 
