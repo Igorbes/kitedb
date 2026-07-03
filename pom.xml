@@ -4,7 +4,7 @@
 
     <groupId>pro.kitedb</groupId>
     <artifactId>KiteDB</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2-SNAPSHOT</version>
     <name>Kite DB tools</name>
     <description>Kite DB tools</description>
     <url>https://github.com/Igorbes/kitedb.git</url>
@@ -17,12 +17,7 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:https://github.com/Igorbes/kitedb.git</connection>
-        <developerConnection>scm:git:https://github.com/Igorbes/kitedb.git</developerConnection>
-        <url>https://github.com/Igorbes/kitedb.git</url>
-        <tag>KiteDB-3.0.1</tag>
-    </scm>
+
 
     <developers>
         <developer>
